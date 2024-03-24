@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { Widget } from '@/components/widgets/base/widget.tsx';
+import { Widget } from '@/components/widgets/widget.tsx';
 import { formatHu } from '@/utils/common.utils.ts';
 
 export function Clock() {
