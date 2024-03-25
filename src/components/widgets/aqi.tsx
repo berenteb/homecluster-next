@@ -11,14 +11,16 @@ export function AqiWidget() {
   if (!aqiValue) {
     return null;
   }
+
   return (
     <Widget
       className={cn('flex items-center justify-between bg-gradient-to-br', {
-        'from-teal-300 to-teal-600 text-white': aqiValue.main.aqi === 1,
-        'from-green-300 to-green-600 text-white': aqiValue.main.aqi === 2,
-        'from-yellow-300 to-yellow-600 text-gray-700': aqiValue.main.aqi === 3,
-        'from-red-300 to-red-600 text-white': aqiValue.main.aqi === 4,
-        'from-purple-300 to-purple-600 text-white': aqiValue.main.aqi === 5,
+        'text-white from-teal-300 to-teal-600 dark:from-teal-600 dark:to-teal-900': aqiValue.main.aqi === 1,
+        'text-white from-emerald-300 to-emerald-600 dark:from-emerald-600 dark:to-emerald-900': aqiValue.main.aqi === 2,
+        'text-gray-700 dark:text-white from-yellow-300 to-yellow-600 dark:from-yellow-600 dark:to-yellow-900':
+          aqiValue.main.aqi === 3,
+        'text-white from-red-300 to-red-600 dark:from-red-600 dark:to-red-900': aqiValue.main.aqi === 4,
+        'text-white from-purple-300 to-purple-600 dark:from-purple-600 dark:to-purple-900': aqiValue.main.aqi === 5,
       })}
     >
       <div className='space-y-5 justify-center'>

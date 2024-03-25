@@ -13,7 +13,7 @@ h3,
 h4,
 h5,
 h6 {
-  @apply text-gray-700;
+  @apply text-gray-700 dark:text-gray-100;
 }
 
 h1 {
@@ -33,5 +33,5 @@ h4 {
 }
 
 p {
-  @apply text-xl text-gray-500;
+  @apply text-xl text-gray-500 dark:text-gray-300;
 }

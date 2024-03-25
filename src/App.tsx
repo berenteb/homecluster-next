@@ -11,11 +11,11 @@ export function App() {
         backgroundImage: 'url("https://images.unsplash.com/photo-1631679706909-1844bbd07221")',
       }}
     >
-      <div className='grid grid-cols-3 grid-rows-3 p-10 gap-10 h-screen w-screen bg-slate-50/50'>
+      <div className='grid grid-cols-3 grid-rows-3 p-10 gap-10 h-screen w-screen bg-slate-50/50 dark:bg-slate-900/50'>
         <Clock />
         <AqiWidget />
-        <WeatherWidget />
         <WeatherCamWidget />
+        <WeatherWidget />
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import { addMinutes } from 'date-fns';
 import { IconType } from 'react-icons';
 import { FiArrowDown, FiArrowUp } from 'react-icons/fi';
 import { WiCloudy, WiRain, WiSnow } from 'react-icons/wi';
@@ -11,7 +12,12 @@ export function WeatherWidget() {
 
   if (!weather.data) return null;
 
-  const forecast = weather.data.forecast;
+  const forecast = {
+    nextRain: addMinutes(new Date(), 5).getTime() / 1000,
+    rainEnd: addMinutes(new Date(), 10).getTime() / 1000,
+    nextSnow: addMinutes(new Date(), 15).getTime() / 1000,
+    snowEnd: addMinutes(new Date(), 20).getTime() / 1000,
+  };
 
   const shouldShowForecast =
     (forecast.rainEnd && weather.data.rain) ||
@@ -23,17 +29,25 @@ export function WeatherWidget() {
     <>
       <Widget
         className={cn('flex gap-5 items-center justify-start bg-gradient-to-br', {
-          'from-slate-200 to-slate-400': weather.data.weatherId > 800,
-          'from-yellow-100 to-blue-400': weather.data.weatherId === 800,
-          'from-gray-50 to-gray-300': weather.data.weatherId >= 700 && weather.data.weatherId < 800,
-          'from-white to-gray-200': weather.data.weatherId >= 600 && weather.data.weatherId < 700,
-          'from-gray-500 to-blue-500': weather.data.weatherId >= 500 && weather.data.weatherId < 600,
-          'from-gray-500 to-blue-200': weather.data.weatherId >= 300 && weather.data.weatherId < 500,
-          'from-gray-400 to-gray-600': weather.data.weatherId < 300,
+          'from-slate-200 to-slate-400 dark:from-gray-500 dark:to-gray-600': weather.data.weatherId > 800, // Clouds
+          'from-yellow-100 to-blue-400 dark:from-gray-800 dark:to-gray-900': weather.data.weatherId === 800, // Clear
+          'from-gray-50 to-gray-300 dark:from-gray-400 dark:to-gray-500':
+            weather.data.weatherId >= 700 && weather.data.weatherId < 800, // Atmosphere
+          'from-white to-gray-200 dark:from-gray-400 dark:to-gray-500':
+            weather.data.weatherId >= 600 && weather.data.weatherId < 700, // Snow
+          'from-gray-500 to-blue-500 dark:from-gray-800 dark:to-blue-900':
+            weather.data.weatherId >= 500 && weather.data.weatherId < 600, // Rain
+          'from-gray-500 to-blue-200 dark:from-gray-800 dark:to-blue-800':
+            weather.data.weatherId >= 300 && weather.data.weatherId < 500, // Drizzle
+          'from-gray-400 to-gray-600 dark:from-orange-900/50 dark:to-gray-900': weather.data.weatherId < 300, // Thunderstorm
         })}
       >
         {weather.data.icon && (
-          <img className='bg-white/30 backdrop-blur-md rounded-full' src={weather.data.icon} alt='weather icon' />
+          <img
+            className='bg-white/30 dark:bg-black/30 backdrop-blur-md rounded-full'
+            src={weather.data.icon}
+            alt='weather icon'
+          />
         )}
         <div className='space-y-5'>
           <h2>
@@ -48,23 +62,11 @@ export function WeatherWidget() {
           </p>
         </div>
       </Widget>
-      {shouldShowForecast && (
-        <Widget className='flex flex-wrap justify-evenly bg-gradient-to-br from-blue-200 to-blue-500 text-white p-10'>
-          {forecast.nextRain && <ForecastField icon={WiRain} label='Eső várható' time={forecast.nextRain} />}
-          {forecast.rainEnd && weather.data.rain && (
-            <ForecastField icon={WiCloudy} label='Eső vége' time={forecast.rainEnd} />
-          )}
-          {forecast.nextSnow && <ForecastField icon={WiSnow} label='Havazás várható' time={forecast.nextSnow} />}
-          {forecast.snowEnd && weather.data.snow && (
-            <ForecastField icon={WiCloudy} label='Havazás vége' time={forecast.snowEnd} />
-          )}
-        </Widget>
-      )}
       <Widget className='grid grid-cols-6 gap-3 p-10'>
         {weather.data.daily.map((daily) => (
           <div
             key={daily.timestamp}
-            className='bg-white/50 backdrop-blur-sm shadow-inner rounded-md pb-2 text-center flex flex-col items-center justify-between'
+            className='bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm shadow-inner rounded-md pb-2 text-center flex flex-col items-center justify-between'
           >
             {daily.weather && <img src={daily.weather} alt='weather icon' />}
             <div>
@@ -75,6 +77,18 @@ export function WeatherWidget() {
           </div>
         ))}
       </Widget>
+      {shouldShowForecast && (
+        <Widget className='flex flex-wrap justify-evenly bg-gradient-to-br from-blue-200 to-blue-500 dark:from-blue-900 dark:to-blue-950 text-white p-10'>
+          {forecast.nextRain && <ForecastField icon={WiRain} label='Eső várható' time={forecast.nextRain} />}
+          {forecast.rainEnd && weather.data.rain && (
+            <ForecastField icon={WiCloudy} label='Eső vége' time={forecast.rainEnd} />
+          )}
+          {forecast.nextSnow && <ForecastField icon={WiSnow} label='Havazás várható' time={forecast.nextSnow} />}
+          {forecast.snowEnd && weather.data.snow && (
+            <ForecastField icon={WiCloudy} label='Havazás vége' time={forecast.snowEnd} />
+          )}
+        </Widget>
+      )}
     </>
   );
 }
