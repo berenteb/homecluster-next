@@ -46,6 +46,8 @@ export function useWeather() {
           ? `https://openweathermap.org/img/wn/${dailyItem.weather[0].icon}@2x.png`
           : undefined,
       })),
+      sunrise: data.current.sunrise * 1000,
+      sunset: data.current.sunset * 1000,
     }),
   });
 }

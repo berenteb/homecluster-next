@@ -1,4 +1,3 @@
-import { addMinutes } from 'date-fns';
 import { IconType } from 'react-icons';
 import { FiArrowDown, FiArrowUp } from 'react-icons/fi';
 import { WiCloudy, WiRain, WiSnow } from 'react-icons/wi';
@@ -12,12 +11,7 @@ export function WeatherWidget() {
 
   if (!weather.data) return null;
 
-  const forecast = {
-    nextRain: addMinutes(new Date(), 5).getTime() / 1000,
-    rainEnd: addMinutes(new Date(), 10).getTime() / 1000,
-    nextSnow: addMinutes(new Date(), 15).getTime() / 1000,
-    snowEnd: addMinutes(new Date(), 20).getTime() / 1000,
-  };
+  const forecast = weather.data.forecast;
 
   const shouldShowForecast =
     (forecast.rainEnd && weather.data.rain) ||

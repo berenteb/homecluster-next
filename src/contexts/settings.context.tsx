@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, useContext, useState } from 'react';
+import { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
 
 import { StorageService } from '@/services/storage.service.ts';
 import { Coordinates } from '@/types/coordinate.type.ts';
@@ -35,6 +35,15 @@ export function SettingsProvider({ children }: PropsWithChildren) {
     StorageService.setBackgroundUrl(url);
     setBackgroundUrlState(url);
   };
+
+  useEffect(() => {
+    const html = document.querySelector('html');
+    if (darkMode) {
+      html?.classList.add('dark');
+    } else {
+      html?.classList.remove('dark');
+    }
+  }, [darkMode]);
 
   return (
     <SettingsContext.Provider
