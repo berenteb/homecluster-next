@@ -15,7 +15,7 @@ export function App() {
         backgroundImage: `url("${backgroundUrl}")`,
       }}
     >
-      <div className='grid grid-cols-3 grid-rows-3 p-10 gap-10 h-screen w-screen bg-slate-50/50 dark:bg-slate-900/50'>
+      <div className='grid grid-cols-3 grid-rows-3 p-32 gap-10 h-screen w-screen bg-slate-50/50 dark:bg-slate-900/50'>
         <Clock />
         <AqiWidget />
         <WeatherCamWidget />
