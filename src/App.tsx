@@ -1,5 +1,6 @@
 import { AqiWidget } from '@/components/widgets/aqi.tsx';
 import { Clock } from '@/components/widgets/clock.tsx';
+import { WeatherWidget } from '@/components/widgets/weather.tsx';
 import { Widget } from '@/components/widgets/widget.tsx';
 
 export function App() {
@@ -13,7 +14,7 @@ export function App() {
       <div className='grid grid-cols-3 grid-rows-3 p-10 gap-10 h-screen w-screen bg-slate-50/50'>
         <Clock />
         <AqiWidget />
-        <Widget />
+        <WeatherWidget />
         <Widget />
         <Widget />
         <Widget />

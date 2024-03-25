@@ -21,7 +21,7 @@ export function AqiWidget() {
         'from-purple-300 to-purple-600 text-white': aqiValue.main.aqi === 5,
       })}
     >
-      <div className='flex flex-col gap-5 justify-center'>
+      <div className='space-y-5 justify-center'>
         <p className='text-inherit uppercase font-thin'>Levegőminőség</p>
         <h2 className='text-inherit'>
           {Math.round(aqiValue.components.pm2_5) || '?'}
