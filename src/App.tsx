@@ -1,7 +1,6 @@
 import { AqiWidget } from '@/components/widgets/aqi.tsx';
 import { Clock } from '@/components/widgets/clock.tsx';
 import { WeatherWidget } from '@/components/widgets/weather.tsx';
-import { Widget } from '@/components/widgets/widget.tsx';
 
 export function App() {
   return (
@@ -15,9 +14,6 @@ export function App() {
         <Clock />
         <AqiWidget />
         <WeatherWidget />
-        <Widget />
-        <Widget />
-        <Widget />
       </div>
     </div>
   );
