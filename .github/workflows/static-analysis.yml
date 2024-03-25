@@ -1,0 +1,43 @@
+name: Static Analysis
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+    eslint:
+        name: ESLint Check
+        runs-on: ubuntu-latest
+
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@v4
+
+          - name: Setup Node.js
+            uses: actions/setup-node@v4
+
+          - name: Install dependencies
+            run: yarn install --frozen-lockfile --non-interactive --production=false
+
+          - name: Run ESLint check
+            run: yarn lint:check
+    prettier:
+      name: Prettier Check
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+
+        - name: Install dependencies
+          run: yarn install --frozen-lockfile --non-interactive --production=false
+
+        - name: Run Prettier check
+          run: yarn prettier:check
