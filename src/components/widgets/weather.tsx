@@ -64,7 +64,7 @@ export function WeatherWidget() {
         {weather.data.daily.map((daily) => (
           <div
             key={daily.timestamp}
-            className='bg-white/50 backdrop-blur-sm shadow-md rounded-md pb-2 text-center flex flex-col items-center justify-between'
+            className='bg-white/50 backdrop-blur-sm shadow-inner rounded-md pb-2 text-center flex flex-col items-center justify-between'
           >
             {daily.weather && <img src={daily.weather} alt='weather icon' />}
             <div>
