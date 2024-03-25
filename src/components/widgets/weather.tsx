@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { IconType } from 'react-icons';
 import { FiArrowDown, FiArrowUp } from 'react-icons/fi';
 import { WiCloudy, WiRain, WiSnow } from 'react-icons/wi';
@@ -14,14 +13,11 @@ export function WeatherWidget() {
 
   const forecast = weather.data.forecast;
 
-  const shouldShowForecast = useMemo(() => {
-    return (
-      (forecast.rainEnd && weather.data.rain) ||
-      (forecast.snowEnd && weather.data.snow) ||
-      forecast.nextRain ||
-      forecast.nextSnow
-    );
-  }, [forecast, weather.data.rain, weather.data.snow]);
+  const shouldShowForecast =
+    (forecast.rainEnd && weather.data.rain) ||
+    (forecast.snowEnd && weather.data.snow) ||
+    forecast.nextRain ||
+    forecast.nextSnow;
 
   return (
     <>
