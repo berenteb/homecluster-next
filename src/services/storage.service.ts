@@ -5,6 +5,8 @@ const DefaultCoordinates: Coordinates = {
   lon: 19.052844,
 };
 
+const DefaultBackgroundUrl = 'https://source.unsplash.com/1920x1080?living%20room';
+
 export class StorageService {
   private static readonly coordinatesKey = 'coordinates';
   private static readonly backgroundUrlKey = 'backgroundUrl';
@@ -12,7 +14,6 @@ export class StorageService {
   static getCoordinates() {
     const coordinates = localStorage.getItem(this.coordinatesKey);
     if (!coordinates) {
-      this.setCoordinates(DefaultCoordinates);
       return DefaultCoordinates;
     }
     try {
@@ -28,7 +29,7 @@ export class StorageService {
   }
 
   static getBackgroundUrl() {
-    return localStorage.getItem(this.backgroundUrlKey) || '';
+    return localStorage.getItem(this.backgroundUrlKey) || DefaultBackgroundUrl;
   }
 
   static setBackgroundUrl(url: string) {
